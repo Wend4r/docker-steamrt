@@ -8,6 +8,7 @@ STEAMRT_IMAGE_NAME=`cat "$STEAMRT_DATA_DIR/image_name.txt"`
 STEAMRT_CONTAINER_NAME=`cat "$STEAMRT_DATA_DIR/container_name.txt"`
 STEAMRT_HOSTNAME=`cat "$STEAMRT_DATA_DIR/hostname.txt"`
 
+echo "Running SteamRT container"
 docker run -it \
            --hostname "$STEAMRT_HOSTNAME" \
            --restart unless-stopped \
