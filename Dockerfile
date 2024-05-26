@@ -6,8 +6,5 @@ RUN adduser --disabled-password --gecos "" steam && \
 	chown -R steam:steam /home/steam
 
 ENV DEBIAN_FRONTEND=noninteractive
-USER steam
-ENV USER=steam HOME=/home/steam
-WORKDIR /home/steam
 
 CMD [ "/bin/bash" ]
