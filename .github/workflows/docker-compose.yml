@@ -1,0 +1,41 @@
+name: Docker Compose
+
+on:
+  push:
+    branches:
+      - sniper
+  pull_request:
+    branches:
+      - sniper
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build & run image
+      run: |
+        docker compose up -d
+
+    - name: Check Docker containters
+      run: |
+        docker ps -a
+
+    - name: Run test command inside container
+      run: |
+        ./exec.sh cat /etc/os-release
+
+    - name: Shutdown
+      run: |
+        docker compose down
