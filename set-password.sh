@@ -2,29 +2,29 @@
 
 source .env
 
-if [ -z "$STEAMRT_TARGET_USERNAME" ]; then
-	read -s -p "Enter username (by default, root): " STEAMRT_TARGET_USERNAME
+if [ -z "$STEAMOS_TARGET_USERNAME" ]; then
+	read -s -p "Enter username (by default, root): " STEAMOS_TARGET_USERNAME
 	echo
 
-	if [ -z "$STEAMRT_TARGET_USERNAME" ]; then
-		STEAMRT_TARGET_USERNAME="root"
+	if [ -z "$STEAMOS_TARGET_USERNAME" ]; then
+		STEAMOS_TARGET_USERNAME="root"
 	fi
 fi
 
-STEAMRT_USER_PASSWORD_PATH="$STEAMRT_DATA_DIR/${STEAMRT_TARGET_USERNAME}_password.txt"
-STEAMRT_USER_PASSWORD=`cat "$STEAMRT_USER_PASSWORD_PATH" 2> /dev/null`
+STEAMOS_USER_PASSWORD_PATH="$STEAMOS_DATA_DIR/${STEAMOS_TARGET_USERNAME}_password.txt"
+STEAMOS_USER_PASSWORD=`cat "$STEAMOS_USER_PASSWORD_PATH" 2> /dev/null`
 
-if [ -z "$STEAMRT_USER_PASSWORD" ]; then
-	read -s -p "Enter $STEAMRT_TARGET_USERNAME password (by default, randomly): " STEAMRT_USER_PASSWORD
+if [ -z "$STEAMOS_USER_PASSWORD" ]; then
+	read -s -p "Enter $STEAMOS_TARGET_USERNAME password (by default, randomly): " STEAMOS_USER_PASSWORD
 	echo
 
-	if [ -z "$STEAMRT_USER_PASSWORD" ]; then
-		STEAMRT_USER_PASSWORD=`openssl rand -base64 12 | tr -dc 'a-zA-Z0-9' | head -c 12`
-		cat <<< "$STEAMRT_USER_PASSWORD" > $STEAMRT_USER_PASSWORD_PATH
+	if [ -z "$STEAMOS_USER_PASSWORD" ]; then
+		STEAMOS_USER_PASSWORD=`openssl rand -base64 12 | tr -dc 'a-zA-Z0-9' | head -c 12`
+		cat <<< "$STEAMOS_USER_PASSWORD" > $STEAMOS_USER_PASSWORD_PATH
 	fi
 fi
 
-echo "Password stored in \"$STEAMRT_USER_PASSWORD_PATH\""
+echo "Password stored in \"$STEAMOS_USER_PASSWORD_PATH\""
 
-docker exec -u root "$STEAMRT_CONTAINER_NAME" usermod -p "$(echo $STEAMRT_USER_PASSWORD | openssl passwd -1 -stdin)" $STEAMRT_TARGET_USERNAME && \
+docker exec -u root "$STEAMOS_CONTAINER_NAME" usermod -p "$(echo $STEAMOS_USER_PASSWORD | openssl passwd -1 -stdin)" $STEAMOS_TARGET_USERNAME && \
 echo "Successful!"
