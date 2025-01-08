@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  steamrt:
+    build:
+      context: .
+    container_name: ${STEAMOS_CONTAINER_NAME}
+    hostname: ${STEAMOS_HOSTNAME}
+    image: ${STEAMOS_IMAGE_NAME}
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
