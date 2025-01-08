@@ -2,6 +2,6 @@
 
 source .env
 
-echo "Building SteamRT image"
+echo "Building \"$STEAMOS_IMAGE_NAME\" image..."
 docker build -t "$STEAMOS_IMAGE_NAME" .
 echo "Done!"

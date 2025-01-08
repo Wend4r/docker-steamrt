@@ -2,7 +2,7 @@
 
 source .env
 
-echo "Running SteamRT container"
+echo "Running \"$STEAMOS_CONTAINER_NAME\" container"
 docker run -it \
            --hostname "$STEAMOS_HOSTNAME" \
            --restart unless-stopped \

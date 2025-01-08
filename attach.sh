@@ -2,5 +2,5 @@
 
 source .env
 
-echo "Attaching to SteamRT container"
+echo "Attaching to \"$STEAMOS_CONTAINER_NAME\" container"
 docker container attach "$STEAMOS_CONTAINER_NAME"
