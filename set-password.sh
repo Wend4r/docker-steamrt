@@ -7,7 +7,7 @@ STEAMOS_DATA_DIR="$SCRIPT_DIR/data"
 source .env
 
 if [ -z "$STEAMOS_TARGET_USERNAME" ]; then
-	read -s -p "Enter a username (by default, root): " STEAMOS_TARGET_USERNAME
+	read -s -p "Enter a username (by default, \"root\"): " STEAMOS_TARGET_USERNAME
 	echo
 
 	if [ -z "$STEAMOS_TARGET_USERNAME" ]; then
@@ -28,7 +28,7 @@ if [ -z "$STEAMOS_USER_PASSWORD" ]; then
 	fi
 fi
 
-echo "A changed password stored in \"$STEAMOS_USER_PASSWORD_PATH\""
+echo "A changed password stored into \"$STEAMOS_USER_PASSWORD_PATH\""
 
-./exec.sh -u root "$STEAMOS_CONTAINER_NAME" usermod -p "$(echo $STEAMOS_USER_PASSWORD | openssl passwd -1 -stdin)" "$STEAMOS_TARGET_USERNAME" && \
+./exec.sh usermod -p "$(echo $STEAMOS_USER_PASSWORD | openssl passwd -1 -stdin)" "$STEAMOS_TARGET_USERNAME" && \
 echo "Successful!"
